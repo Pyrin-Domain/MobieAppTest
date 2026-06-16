@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrawAnywhere GUI Automation Test Report</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+               background: #f5f5f5; color: #333; padding: 20px; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                  color: white; padding: 30px; border-radius: 12px; margin-bottom: 20px; }
+        .header h1 { font-size: 28px; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 14px; }
+        .summary { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+        .summary-card { background: white; border-radius: 10px; padding: 20px; flex: 1;
+                        min-width: 140px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center; }
+        .summary-card .value { font-size: 32px; font-weight: bold; margin: 8px 0; }
+        .summary-card .label { font-size: 12px; color: #888; text-transform: uppercase; }
+        .summary-card.pass { border-top: 4px solid #28a745; }
+        .summary-card.fail { border-top: 4px solid #dc3545; }
+        .summary-card.info { border-top: 4px solid #17a2b8; }
+        table { width: 100%; border-collapse: collapse; background: white;
+                border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        th { background: #f8f9fa; padding: 12px 16px; text-align: left; font-size: 13px;
+             text-transform: uppercase; color: #888; border-bottom: 2px solid #e9ecef; }
+        td { padding: 10px 16px; border-bottom: 1px solid #e9ecef; font-size: 14px; }
+        tr:hover { background: #f8f9fa; }
+        .passed {  }
+        .failed { background: #fff5f5; }
+        .error-box { background: #fff5f5; border: 1px solid #dc3545;
+                     border-radius: 6px; padding: 12px; margin: 8px 0; color: #dc3545; }
+        .error-msg { color: #dc3545; font-size: 12px; margin-left: 8px; }
+        .steps-table { margin-top: 8px; font-size: 13px; }
+        .steps-table th { font-size: 11px; padding: 6px 12px; }
+        .steps-table td { padding: 6px 12px; }
+        .footer { text-align: center; margin-top: 20px; color: #888; font-size: 12px; }
+    </style>
+    <script>
+        // Make test rows expandable to show step details
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.test-row').forEach(function(row) {
+                row.style.cursor = 'pointer';
+                row.addEventListener('click', function() {
+                    var detail = row.nextElementSibling;
+                    if (detail && detail.classList.contains('error-detail')) {
+                        detail.style.display = detail.style.display === 'none' ? 'table-row' : 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>DrawAnywhere GUI Automation Test Report</h1>
+        <p>UIAutomator2-based automated GUI tests for DrawAnywhere</p>
+        <p>Generated: 2026-06-16 17:53:36</p>
+    </div>
+
+    <div class="summary">
+        <div class="summary-card fail">
+            <div class="label">Tests</div>
+            <div class="value">4/6</div>
+            <div class="label">Pass Rate: 66.7%</div>
+        </div>
+        <div class="summary-card fail">
+            <div class="label">Steps</div>
+            <div class="value">42/44</div>
+            <div class="label">Step Rate: 95.5%</div>
+        </div>
+        <div class="summary-card info">
+            <div class="label">Duration</div>
+            <div class="value">1006.7s</div>
+            <div class="label">Total Time</div>
+        </div>
+        <div class="summary-card fail">
+            <div class="label">Status</div>
+            <div class="value">FAIL</div>
+            <div class="label">6 test(s)</div>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th width="30"></th>
+                <th>Module</th>
+                <th>Test Name</th>
+                <th>Result</th>
+                <th>Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr class="test-row passed">
+                <td>✅</td>
+                <td><strong>launch</strong></td>
+                <td>test_app_launch_flow</td>
+                <td style="color:#28a745; font-weight:bold;">PASSED</td>
+                <td>33532ms</td>
+            </tr>
+            <tr class="error-detail" style="display:none;">
+                <td colspan="5">
+                    <table class="steps-table">
+                        <thead><tr><th></th><th>Step</th><th>Result</th><th>Duration</th><th>Error</th></tr></thead>
+                        <tbody>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Force stop app for clean start</td>
+                    <td>✅ PASSED</td>
+                    <td>2094ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Launch DrawAnywhere app</td>
+                    <td>✅ PASSED</td>
+                    <td>15703ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Handle overlay permission dialog</td>
+                    <td>✅ PASSED</td>
+                    <td>8015ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Verify app is ready (toolbar visible)</td>
+                    <td>✅ PASSED</td>
+                    <td>5282ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Verify core toolbar buttons are visible</td>
+                    <td>✅ PASSED</td>
+                    <td>172ms</td>
+                    <td></td>
+                </tr></tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr class="test-row passed">
+                <td>✅</td>
+                <td><strong>launch</strong></td>
+                <td>test_app_relaunch</td>
+                <td style="color:#28a745; font-weight:bold;">PASSED</td>
+                <td>31494ms</td>
+            </tr>
+            <tr class="error-detail" style="display:none;">
+                <td colspan="5">
+                    <table class="steps-table">
+                        <thead><tr><th></th><th>Step</th><th>Result</th><th>Duration</th><th>Error</th></tr></thead>
+                        <tbody>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Ensure app is running</td>
+                    <td>✅ PASSED</td>
+                    <td>15625ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Re-launch DrawAnywhere while already running</td>
+                    <td>✅ PASSED</td>
+                    <td>15594ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Verify toolbar is still functional after re-launch</td>
+                    <td>✅ PASSED</td>
+                    <td>47ms</td>
+                    <td></td>
+                </tr></tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr class="test-row passed">
+                <td>✅</td>
+                <td><strong>drawing</strong></td>
+                <td>test_drawing_operations</td>
+                <td style="color:#28a745; font-weight:bold;">PASSED</td>
+                <td>337913ms</td>
+            </tr>
+            <tr class="error-detail" style="display:none;">
+                <td colspan="5">
+                    <table class="steps-table">
+                        <thead><tr><th></th><th>Step</th><th>Result</th><th>Duration</th><th>Error</th></tr></thead>
+                        <tbody>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Verify toolbar is visible for drawing</td>
+                    <td>✅ PASSED</td>
+                    <td>46ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Open tool controls popup</td>
+                    <td>✅ PASSED</td>
+                    <td>2610ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Select Pen tool</td>
+                    <td>✅ PASSED</td>
+                    <td>2641ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Close tool controls popup</td>
+                    <td>✅ PASSED</td>
+                    <td>1609ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Open color picker popup</td>
+                    <td>✅ PASSED</td>
+                    <td>2672ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Select a color from the picker</td>
+                    <td>✅ PASSED</td>
+                    <td>1750ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Close color picker popup</td>
+                    <td>✅ PASSED</td>
+                    <td>1563ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Open tool controls for stroke settings</td>
+                    <td>✅ PASSED</td>
+                    <td>2703ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Close stroke controls popup</td>
+                    <td>✅ PASSED</td>
+                    <td>2563ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Ensure canvas is visible for drawing</td>
+                    <td>✅ PASSED</td>
+                    <td>141ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Draw a horizontal line on canvas</td>
+                    <td>✅ PASSED</td>
+                    <td>1937ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Draw a vertical line on canvas</td>
+                    <td>✅ PASSED</td>
+                    <td>1922ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Draw a diagonal line on canvas</td>
+                    <td>✅ PASSED</td>
+                    <td>1922ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Undo last stroke</td>
+                    <td>✅ PASSED</td>
+                    <td>2640ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Undo second stroke</td>
+                    <td>✅ PASSED</td>
+                    <td>2672ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Expand second drawer for redo</td>
+                    <td>✅ PASSED</td>
+                    <td>2563ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Redo one stroke</td>
+                    <td>✅ PASSED</td>
+                    <td>94547ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Collapse second drawer</td>
+                    <td>✅ PASSED</td>
+                    <td>94359ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Clear canvas</td>
+                    <td>✅ PASSED</td>
+                    <td>2625ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Hide canvas</td>
+                    <td>✅ PASSED</td>
+                    <td>2672ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Show canvas</td>
+                    <td>✅ PASSED</td>
+                    <td>2641ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Open tool controls for eraser selection</td>
+                    <td>✅ PASSED</td>
+                    <td>2671ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Select Stroke Eraser tool</td>
+                    <td>✅ PASSED</td>
+                    <td>2703ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Close tool controls after eraser selection</td>
+                    <td>✅ PASSED</td>
+                    <td>1593ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Erase stroke by drawing over it</td>
+                    <td>✅ PASSED</td>
+                    <td>1938ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Switch back to Pen tool</td>
+                    <td>✅ PASSED</td>
+                    <td>8422ms</td>
+                    <td></td>
+                </tr></tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr class="test-row passed">
+                <td>✅</td>
+                <td><strong>toolbar</strong></td>
+                <td>test_toolbar_interactions</td>
+                <td style="color:#28a745; font-weight:bold;">PASSED</td>
+                <td>220416ms</td>
+            </tr>
+            <tr class="error-detail" style="display:none;">
+                <td colspan="5">
+                    <table class="steps-table">
+                        <thead><tr><th></th><th>Step</th><th>Result</th><th>Duration</th><th>Error</th></tr></thead>
+                        <tbody>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Verify toolbar is visible</td>
+                    <td>✅ PASSED</td>
+                    <td>47ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Open settings popup</td>
+                    <td>✅ PASSED</td>
+                    <td>94328ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Close settings popup</td>
+                    <td>✅ PASSED</td>
+                    <td>2594ms</td>
+                    <td></td>
+                </tr></tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr class="test-row failed">
+                <td>❌</td>
+                <td><strong>settings</strong></td>
+                <td>test_settings_page</td>
+                <td style="color:#dc3545; font-weight:bold;">FAILED</td>
+                <td>192077ms</td>
+            </tr>
+            <tr class="error-detail" style="display:none;">
+                <td colspan="5"><div class="error-box">❌ Critical step 'Verify Settings label is visible' failed: Verification failed: Verification failed for step: Verify Settings label is visible</div>
+                    <table class="steps-table">
+                        <thead><tr><th></th><th>Step</th><th>Result</th><th>Duration</th><th>Error</th></tr></thead>
+                        <tbody>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Open settings popup</td>
+                    <td>✅ PASSED</td>
+                    <td>137860ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row failed">
+                    <td style="padding-left: 24px;">❌</td>
+                    <td>Verify Settings label is visible</td>
+                    <td>❌ FAILED</td>
+                    <td>21312ms</td>
+                    <td><span class="error-msg">Verification failed: Verification failed for step: Verify Settings label is visible</span></td>
+                </tr></tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr class="test-row failed">
+                <td>❌</td>
+                <td><strong>quit</strong></td>
+                <td>test_app_quit</td>
+                <td style="color:#dc3545; font-weight:bold;">FAILED</td>
+                <td>191282ms</td>
+            </tr>
+            <tr class="error-detail" style="display:none;">
+                <td colspan="5"><div class="error-box">❌ Critical step 'Verify toolbar is no longer visible' failed: Verification failed: Verification failed for step: Verify toolbar is no longer visible</div>
+                    <table class="steps-table">
+                        <thead><tr><th></th><th>Step</th><th>Result</th><th>Duration</th><th>Error</th></tr></thead>
+                        <tbody>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Verify app is running before quit test</td>
+                    <td>✅ PASSED</td>
+                    <td>140ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Open settings popup</td>
+                    <td>✅ PASSED</td>
+                    <td>137047ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Click Quit button in settings</td>
+                    <td>✅ PASSED</td>
+                    <td>10625ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Verify app service has stopped</td>
+                    <td>✅ PASSED</td>
+                    <td>5375ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row failed">
+                    <td style="padding-left: 24px;">❌</td>
+                    <td>Verify toolbar is no longer visible</td>
+                    <td>❌ FAILED</td>
+                    <td>235ms</td>
+                    <td><span class="error-msg">Verification failed: Verification failed for step: Verify toolbar is no longer visible</span></td>
+                </tr></tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="footer">
+        DrawAnywhere UIAutomator2 Test Report · Generated by test_runner.py
+    </div>
+</div>
+</body>
+</html>

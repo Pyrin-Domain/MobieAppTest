@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrawAnywhere GUI Automation Test Report</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+               background: #f5f5f5; color: #333; padding: 20px; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                  color: white; padding: 30px; border-radius: 12px; margin-bottom: 20px; }
+        .header h1 { font-size: 28px; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 14px; }
+        .summary { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+        .summary-card { background: white; border-radius: 10px; padding: 20px; flex: 1;
+                        min-width: 140px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center; }
+        .summary-card .value { font-size: 32px; font-weight: bold; margin: 8px 0; }
+        .summary-card .label { font-size: 12px; color: #888; text-transform: uppercase; }
+        .summary-card.pass { border-top: 4px solid #28a745; }
+        .summary-card.fail { border-top: 4px solid #dc3545; }
+        .summary-card.info { border-top: 4px solid #17a2b8; }
+        table { width: 100%; border-collapse: collapse; background: white;
+                border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        th { background: #f8f9fa; padding: 12px 16px; text-align: left; font-size: 13px;
+             text-transform: uppercase; color: #888; border-bottom: 2px solid #e9ecef; }
+        td { padding: 10px 16px; border-bottom: 1px solid #e9ecef; font-size: 14px; }
+        tr:hover { background: #f8f9fa; }
+        .passed {  }
+        .failed { background: #fff5f5; }
+        .error-box { background: #fff5f5; border: 1px solid #dc3545;
+                     border-radius: 6px; padding: 12px; margin: 8px 0; color: #dc3545; }
+        .error-msg { color: #dc3545; font-size: 12px; margin-left: 8px; }
+        .steps-table { margin-top: 8px; font-size: 13px; }
+        .steps-table th { font-size: 11px; padding: 6px 12px; }
+        .steps-table td { padding: 6px 12px; }
+        .footer { text-align: center; margin-top: 20px; color: #888; font-size: 12px; }
+    </style>
+    <script>
+        // Make test rows expandable to show step details
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.test-row').forEach(function(row) {
+                row.style.cursor = 'pointer';
+                row.addEventListener('click', function() {
+                    var detail = row.nextElementSibling;
+                    if (detail && detail.classList.contains('error-detail')) {
+                        detail.style.display = detail.style.display === 'none' ? 'table-row' : 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>DrawAnywhere GUI Automation Test Report</h1>
+        <p>UIAutomator2-based automated GUI tests for DrawAnywhere</p>
+        <p>Generated: 2026-06-16 17:09:43</p>
+    </div>
+
+    <div class="summary">
+        <div class="summary-card pass">
+            <div class="label">Tests</div>
+            <div class="value">2/2</div>
+            <div class="label">Pass Rate: 100.0%</div>
+        </div>
+        <div class="summary-card pass">
+            <div class="label">Steps</div>
+            <div class="value">8/8</div>
+            <div class="label">Step Rate: 100.0%</div>
+        </div>
+        <div class="summary-card info">
+            <div class="label">Duration</div>
+            <div class="value">84.9s</div>
+            <div class="label">Total Time</div>
+        </div>
+        <div class="summary-card pass">
+            <div class="label">Status</div>
+            <div class="value">PASS</div>
+            <div class="label">2 test(s)</div>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th width="30"></th>
+                <th>Module</th>
+                <th>Test Name</th>
+                <th>Result</th>
+                <th>Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr class="test-row passed">
+                <td>✅</td>
+                <td><strong>launch</strong></td>
+                <td>test_app_launch_flow</td>
+                <td style="color:#28a745; font-weight:bold;">PASSED</td>
+                <td>53184ms</td>
+            </tr>
+            <tr class="error-detail" style="display:none;">
+                <td colspan="5">
+                    <table class="steps-table">
+                        <thead><tr><th></th><th>Step</th><th>Result</th><th>Duration</th><th>Error</th></tr></thead>
+                        <tbody>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Force stop app for clean start</td>
+                    <td>✅ PASSED</td>
+                    <td>2079ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Launch DrawAnywhere app</td>
+                    <td>✅ PASSED</td>
+                    <td>15719ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Handle overlay permission dialog</td>
+                    <td>✅ PASSED</td>
+                    <td>22328ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Verify app is ready (toolbar visible)</td>
+                    <td>✅ PASSED</td>
+                    <td>10328ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Verify core toolbar buttons are visible</td>
+                    <td>✅ PASSED</td>
+                    <td>469ms</td>
+                    <td></td>
+                </tr></tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr class="test-row passed">
+                <td>✅</td>
+                <td><strong>launch</strong></td>
+                <td>test_app_relaunch</td>
+                <td style="color:#28a745; font-weight:bold;">PASSED</td>
+                <td>31743ms</td>
+            </tr>
+            <tr class="error-detail" style="display:none;">
+                <td colspan="5">
+                    <table class="steps-table">
+                        <thead><tr><th></th><th>Step</th><th>Result</th><th>Duration</th><th>Error</th></tr></thead>
+                        <tbody>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Ensure app is running</td>
+                    <td>✅ PASSED</td>
+                    <td>15735ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Re-launch DrawAnywhere while already running</td>
+                    <td>✅ PASSED</td>
+                    <td>15578ms</td>
+                    <td></td>
+                </tr>
+                <tr class="step-row passed">
+                    <td style="padding-left: 24px;">✅</td>
+                    <td>Verify toolbar is still functional after re-launch</td>
+                    <td>✅ PASSED</td>
+                    <td>156ms</td>
+                    <td></td>
+                </tr></tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="footer">
+        DrawAnywhere UIAutomator2 Test Report · Generated by test_runner.py
+    </div>
+</div>
+</body>
+</html>

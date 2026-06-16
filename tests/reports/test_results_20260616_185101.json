@@ -1,0 +1,277 @@
+{
+  "title": "DrawAnywhere GUI Automation Test Report",
+  "description": "UIAutomator2-based automated GUI tests for DrawAnywhere",
+  "start_time": "2026-06-16T18:43:38.478121",
+  "end_time": "2026-06-16T18:51:01.692315",
+  "summary": {
+    "total_tests": 4,
+    "passed_tests": 4,
+    "failed_tests": 0,
+    "pass_rate": 100.0,
+    "total_steps": 37,
+    "passed_steps": 37,
+    "failed_steps": 0,
+    "step_pass_rate": 100.0,
+    "total_duration_ms": 441044.907
+  },
+  "test_cases": [
+    {
+      "module": "launch",
+      "name": "test_app_launch_flow",
+      "passed": true,
+      "duration_ms": 33900.055,
+      "error": null,
+      "steps": [
+        {
+          "name": "Force stop app for clean start",
+          "passed": true,
+          "duration_ms": 2141.0000000032596,
+          "error": null
+        },
+        {
+          "name": "Launch DrawAnywhere app",
+          "passed": true,
+          "duration_ms": 16000.0,
+          "error": null
+        },
+        {
+          "name": "Handle overlay permission dialog",
+          "passed": true,
+          "duration_ms": 7968.999999997322,
+          "error": null
+        },
+        {
+          "name": "Verify app is ready (toolbar visible)",
+          "passed": true,
+          "duration_ms": 5264.999999999418,
+          "error": null
+        },
+        {
+          "name": "Verify core toolbar buttons are visible",
+          "passed": true,
+          "duration_ms": 172.0000000022992,
+          "error": null
+        }
+      ]
+    },
+    {
+      "module": "launch",
+      "name": "test_app_relaunch",
+      "passed": true,
+      "duration_ms": 31495.264,
+      "error": null,
+      "steps": [
+        {
+          "name": "Ensure app is running",
+          "passed": true,
+          "duration_ms": 15750.0,
+          "error": null
+        },
+        {
+          "name": "Re-launch DrawAnywhere while already running",
+          "passed": true,
+          "duration_ms": 15467.999999997119,
+          "error": null
+        },
+        {
+          "name": "Verify toolbar is still functional after re-launch",
+          "passed": true,
+          "duration_ms": 32.00000000288128,
+          "error": null
+        }
+      ]
+    },
+    {
+      "module": "drawing",
+      "name": "test_drawing_operations",
+      "passed": true,
+      "duration_ms": 210379.921,
+      "error": null,
+      "steps": [
+        {
+          "name": "Verify toolbar is visible for drawing",
+          "passed": true,
+          "duration_ms": 30.999999999039574,
+          "error": null
+        },
+        {
+          "name": "Open tool controls popup",
+          "passed": true,
+          "duration_ms": 2625.0,
+          "error": null
+        },
+        {
+          "name": "Select Pen tool",
+          "passed": true,
+          "duration_ms": 2686.999999998079,
+          "error": null
+        },
+        {
+          "name": "Close tool controls popup",
+          "passed": true,
+          "duration_ms": 1641.0000000032596,
+          "error": null
+        },
+        {
+          "name": "Open color picker popup",
+          "passed": true,
+          "duration_ms": 2640.9999999996217,
+          "error": null
+        },
+        {
+          "name": "Select a color from the picker",
+          "passed": true,
+          "duration_ms": 1797.0000000022992,
+          "error": null
+        },
+        {
+          "name": "Close color picker popup",
+          "passed": true,
+          "duration_ms": 1609.0000000003783,
+          "error": null
+        },
+        {
+          "name": "Open tool controls for stroke settings",
+          "passed": true,
+          "duration_ms": 2671.999999998661,
+          "error": null
+        },
+        {
+          "name": "Close stroke controls popup",
+          "passed": true,
+          "duration_ms": 2577.999999997701,
+          "error": null
+        },
+        {
+          "name": "Ensure canvas is visible for drawing",
+          "passed": true,
+          "duration_ms": 125.0,
+          "error": null
+        },
+        {
+          "name": "Draw a horizontal line on canvas",
+          "passed": true,
+          "duration_ms": 1906.0000000026776,
+          "error": null
+        },
+        {
+          "name": "Draw a vertical line on canvas",
+          "passed": true,
+          "duration_ms": 1905.9999999990396,
+          "error": null
+        },
+        {
+          "name": "Draw a diagonal line on canvas",
+          "passed": true,
+          "duration_ms": 1890.9999999996217,
+          "error": null
+        },
+        {
+          "name": "Undo last stroke",
+          "passed": true,
+          "duration_ms": 2670.9999999984575,
+          "error": null
+        },
+        {
+          "name": "Undo second stroke",
+          "passed": true,
+          "duration_ms": 2625.0,
+          "error": null
+        },
+        {
+          "name": "Expand second drawer for redo",
+          "passed": true,
+          "duration_ms": 1782.0000000028813,
+          "error": null
+        },
+        {
+          "name": "Redo one stroke",
+          "passed": true,
+          "duration_ms": 30469.00000000096,
+          "error": null
+        },
+        {
+          "name": "Collapse second drawer",
+          "passed": true,
+          "duration_ms": 30655.99999999904,
+          "error": null
+        },
+        {
+          "name": "Clear canvas",
+          "passed": true,
+          "duration_ms": 2594.0000000009604,
+          "error": null
+        },
+        {
+          "name": "Hide canvas",
+          "passed": true,
+          "duration_ms": 2671.999999998661,
+          "error": null
+        },
+        {
+          "name": "Show canvas",
+          "passed": true,
+          "duration_ms": 2625.0,
+          "error": null
+        },
+        {
+          "name": "Open tool controls for eraser selection",
+          "passed": true,
+          "duration_ms": 2625.0,
+          "error": null
+        },
+        {
+          "name": "Select Stroke Eraser tool",
+          "passed": true,
+          "duration_ms": 2625.0,
+          "error": null
+        },
+        {
+          "name": "Close tool controls after eraser selection",
+          "passed": true,
+          "duration_ms": 1578.0000000013388,
+          "error": null
+        },
+        {
+          "name": "Erase stroke by drawing over it",
+          "passed": true,
+          "duration_ms": 1905.9999999990396,
+          "error": null
+        },
+        {
+          "name": "Switch back to Pen tool",
+          "passed": true,
+          "duration_ms": 8375.0,
+          "error": null
+        }
+      ]
+    },
+    {
+      "module": "toolbar",
+      "name": "test_toolbar_interactions",
+      "passed": true,
+      "duration_ms": 165269.667,
+      "error": null,
+      "steps": [
+        {
+          "name": "Verify toolbar is visible",
+          "passed": true,
+          "duration_ms": 46.999999998661224,
+          "error": null
+        },
+        {
+          "name": "Open settings popup",
+          "passed": true,
+          "duration_ms": 39828.00000000134,
+          "error": null
+        },
+        {
+          "name": "Close settings popup",
+          "passed": true,
+          "duration_ms": 2577.999999997701,
+          "error": null
+        }
+      ]
+    }
+  ]
+}

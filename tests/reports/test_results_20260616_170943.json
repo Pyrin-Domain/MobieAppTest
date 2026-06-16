@@ -1,0 +1,85 @@
+{
+  "title": "DrawAnywhere GUI Automation Test Report",
+  "description": "UIAutomator2-based automated GUI tests for DrawAnywhere",
+  "start_time": "2026-06-16T17:08:17.716833",
+  "end_time": "2026-06-16T17:09:43.565660",
+  "summary": {
+    "total_tests": 2,
+    "passed_tests": 2,
+    "failed_tests": 0,
+    "pass_rate": 100.0,
+    "total_steps": 8,
+    "passed_steps": 8,
+    "failed_steps": 0,
+    "step_pass_rate": 100.0,
+    "total_duration_ms": 84926.841
+  },
+  "test_cases": [
+    {
+      "module": "launch",
+      "name": "test_app_launch_flow",
+      "passed": true,
+      "duration_ms": 53184.243,
+      "error": null,
+      "steps": [
+        {
+          "name": "Force stop app for clean start",
+          "passed": true,
+          "duration_ms": 2079.0000000015425,
+          "error": null
+        },
+        {
+          "name": "Launch DrawAnywhere app",
+          "passed": true,
+          "duration_ms": 15719.00000000096,
+          "error": null
+        },
+        {
+          "name": "Handle overlay permission dialog",
+          "passed": true,
+          "duration_ms": 22328.00000000134,
+          "error": null
+        },
+        {
+          "name": "Verify app is ready (toolbar visible)",
+          "passed": true,
+          "duration_ms": 10327.9999999977,
+          "error": null
+        },
+        {
+          "name": "Verify core toolbar buttons are visible",
+          "passed": true,
+          "duration_ms": 469.0000000009604,
+          "error": null
+        }
+      ]
+    },
+    {
+      "module": "launch",
+      "name": "test_app_relaunch",
+      "passed": true,
+      "duration_ms": 31742.598,
+      "error": null,
+      "steps": [
+        {
+          "name": "Ensure app is running",
+          "passed": true,
+          "duration_ms": 15735.000000000582,
+          "error": null
+        },
+        {
+          "name": "Re-launch DrawAnywhere while already running",
+          "passed": true,
+          "duration_ms": 15578.000000001339,
+          "error": null
+        },
+        {
+          "name": "Verify toolbar is still functional after re-launch",
+          "passed": true,
+          "duration_ms": 155.99999999903957,
+          "error": null
+        }
+      ]
+    }
+  ]
+}

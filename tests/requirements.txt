@@ -1,0 +1,24 @@
+# DrawAnywhere GUI Automation Test Dependencies
+# ================================================
+# Install with: pip install -r requirements.txt
+#
+# Minimum Python version: 3.8+
+
+# Core: UIAutomator2 framework for Android GUI automation
+uiautomator2>=3.2.0
+
+# Android Debug Bridge (Python wrapper)
+adbutils>=2.5.0
+
+# Testing framework (optional; test_runner.py can run without pytest)
+pytest>=7.4.0
+pytest-html>=4.1.0
+
+# HTTP library (dependency of uiautomator2)
+requests>=2.28.0
+
+# Image processing (for screenshot comparison, optional)
+Pillow>=10.0.0
+
+# Retry decorator (for robust operation retries)
+retry>=0.9.2

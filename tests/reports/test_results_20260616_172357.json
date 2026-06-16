@@ -1,0 +1,259 @@
+{
+  "title": "DrawAnywhere GUI Automation Test Report",
+  "description": "UIAutomator2-based automated GUI tests for DrawAnywhere",
+  "start_time": "2026-06-16T17:10:05.541651",
+  "end_time": "2026-06-16T17:23:57.239877",
+  "summary": {
+    "total_tests": 4,
+    "passed_tests": 1,
+    "failed_tests": 3,
+    "pass_rate": 25.0,
+    "total_steps": 34,
+    "passed_steps": 31,
+    "failed_steps": 3,
+    "step_pass_rate": 91.18,
+    "total_duration_ms": 830786.674
+  },
+  "test_cases": [
+    {
+      "module": "drawing",
+      "name": "test_drawing_operations",
+      "passed": true,
+      "duration_ms": 404123.178,
+      "error": null,
+      "steps": [
+        {
+          "name": "Verify toolbar is visible for drawing",
+          "passed": true,
+          "duration_ms": 155.99999999903957,
+          "error": null
+        },
+        {
+          "name": "Open tool controls popup",
+          "passed": true,
+          "duration_ms": 16219.00000000096,
+          "error": null
+        },
+        {
+          "name": "Select Pen tool",
+          "passed": true,
+          "duration_ms": 15265.999999999622,
+          "error": null
+        },
+        {
+          "name": "Close tool controls popup",
+          "passed": true,
+          "duration_ms": 1719.0000000009604,
+          "error": null
+        },
+        {
+          "name": "Open color picker popup",
+          "passed": true,
+          "duration_ms": 16780.99999999904,
+          "error": null
+        },
+        {
+          "name": "Select a color from the picker",
+          "passed": true,
+          "duration_ms": 1734.0000000003783,
+          "error": null
+        },
+        {
+          "name": "Close color picker popup",
+          "passed": true,
+          "duration_ms": 1594.0000000009604,
+          "error": null
+        },
+        {
+          "name": "Open tool controls for stroke settings",
+          "passed": true,
+          "duration_ms": 16311.99999999808,
+          "error": null
+        },
+        {
+          "name": "Close stroke controls popup",
+          "passed": true,
+          "duration_ms": 2593.0000000007567,
+          "error": null
+        },
+        {
+          "name": "Ensure canvas is visible for drawing",
+          "passed": true,
+          "duration_ms": 265.99999999962165,
+          "error": null
+        },
+        {
+          "name": "Draw a horizontal line on canvas",
+          "passed": true,
+          "duration_ms": 1953.0000000013388,
+          "error": null
+        },
+        {
+          "name": "Draw a vertical line on canvas",
+          "passed": true,
+          "duration_ms": 1952.9999999977008,
+          "error": null
+        },
+        {
+          "name": "Draw a diagonal line on canvas",
+          "passed": true,
+          "duration_ms": 1938.0000000019209,
+          "error": null
+        },
+        {
+          "name": "Undo last stroke",
+          "passed": true,
+          "duration_ms": 16014.999999999418,
+          "error": null
+        },
+        {
+          "name": "Undo second stroke",
+          "passed": true,
+          "duration_ms": 15969.00000000096,
+          "error": null
+        },
+        {
+          "name": "Redo one stroke",
+          "passed": true,
+          "duration_ms": 88265.99999999962,
+          "error": null
+        },
+        {
+          "name": "Clear canvas",
+          "passed": true,
+          "duration_ms": 15796.999999998661,
+          "error": null
+        },
+        {
+          "name": "Hide canvas",
+          "passed": true,
+          "duration_ms": 15889.999999999418,
+          "error": null
+        },
+        {
+          "name": "Show canvas",
+          "passed": true,
+          "duration_ms": 16781.000000002678,
+          "error": null
+        },
+        {
+          "name": "Open tool controls for eraser selection",
+          "passed": true,
+          "duration_ms": 16546.99999999866,
+          "error": null
+        },
+        {
+          "name": "Select Stroke Eraser tool",
+          "passed": true,
+          "duration_ms": 15500.0,
+          "error": null
+        },
+        {
+          "name": "Close tool controls after eraser selection",
+          "passed": true,
+          "duration_ms": 1594.0000000009604,
+          "error": null
+        },
+        {
+          "name": "Erase stroke by drawing over it",
+          "passed": true,
+          "duration_ms": 1905.9999999990396,
+          "error": null
+        },
+        {
+          "name": "Switch back to Pen tool",
+          "passed": true,
+          "duration_ms": 34640.99999999962,
+          "error": null
+        }
+      ]
+    },
+    {
+      "module": "toolbar",
+      "name": "test_toolbar_interactions",
+      "passed": false,
+      "duration_ms": 71799.932,
+      "error": "Critical step 'Verify toolbar collapsed state indicator' failed: Verification failed: Verification failed for step: Verify toolbar collapsed state indicator",
+      "steps": [
+        {
+          "name": "Verify toolbar is visible",
+          "passed": true,
+          "duration_ms": 203.00000000133878,
+          "error": null
+        },
+        {
+          "name": "Expand secondary toolbar drawer",
+          "passed": true,
+          "duration_ms": 16250.0,
+          "error": null
+        },
+        {
+          "name": "Verify toolbar collapsed state indicator",
+          "passed": false,
+          "duration_ms": 5719.00000000096,
+          "error": "Verification failed: Verification failed for step: Verify toolbar collapsed state indicator"
+        }
+      ]
+    },
+    {
+      "module": "settings",
+      "name": "test_settings_page",
+      "passed": false,
+      "duration_ms": 184326.245,
+      "error": "Critical step 'Verify Settings label is visible' failed: Verification failed: Verification failed for step: Verify Settings label is visible",
+      "steps": [
+        {
+          "name": "Open settings popup",
+          "passed": true,
+          "duration_ms": 124828.00000000134,
+          "error": null
+        },
+        {
+          "name": "Verify Settings label is visible",
+          "passed": false,
+          "duration_ms": 11250.0,
+          "error": "Verification failed: Verification failed for step: Verify Settings label is visible"
+        }
+      ]
+    },
+    {
+      "module": "quit",
+      "name": "test_app_quit",
+      "passed": false,
+      "duration_ms": 170537.319,
+      "error": "Critical step 'Verify toolbar is no longer visible' failed: Verification failed: Verification failed for step: Verify toolbar is no longer visible",
+      "steps": [
+        {
+          "name": "Verify app is running before quit test",
+          "passed": true,
+          "duration_ms": 155.99999999903957,
+          "error": null
+        },
+        {
+          "name": "Open settings popup",
+          "passed": true,
+          "duration_ms": 111703.00000000134,
+          "error": null
+        },
+        {
+          "name": "Click Quit button in settings",
+          "passed": true,
+          "duration_ms": 5625.0,
+          "error": null
+        },
+        {
+          "name": "Verify app service has stopped",
+          "passed": true,
+          "duration_ms": 312.9999999982829,
+          "error": null
+        },
+        {
+          "name": "Verify toolbar is no longer visible",
+          "passed": false,
+          "duration_ms": 343.0000000007567,
+          "error": "Verification failed: Verification failed for step: Verify toolbar is no longer visible"
+        }
+      ]
+    }
+  ]
+}
