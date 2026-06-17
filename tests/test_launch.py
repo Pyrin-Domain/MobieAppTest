@@ -90,20 +90,20 @@ class TestAppLaunch(BaseTest):
 
     def _handle_app_launch_permissions(self):
         """Handle any permission dialogs during app launch."""
-        # Wait for dialogs to appear
-        time.sleep(SHORT_TIMEOUT)
+        # Brief wait for dialogs to appear
+        time.sleep(ANIMATION_WAIT)
 
         # Try to handle custom overlay permission dialog
         handled = self.popup_handler.handle_overlay_permission(accept=True)
         if handled:
             logger.info("Handled custom overlay permission dialog")
-            time.sleep(LONG_TIMEOUT * 0.3)  # Wait for settings screen
+            time.sleep(ANIMATION_WAIT)  # Brief wait for settings screen
             # On settings screen, try to grant permission
             self._grant_system_overlay_permission()
             # Press back to return from settings
-            time.sleep(SHORT_TIMEOUT)
+            time.sleep(ANIMATION_WAIT)
             self.actions.press_back()
-            time.sleep(SHORT_TIMEOUT)
+            time.sleep(ANIMATION_WAIT)
         else:
             # Maybe the permission was already granted
             logger.info("No permission dialog detected (may already be granted)")

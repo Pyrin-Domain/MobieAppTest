@@ -227,7 +227,7 @@ class ElementLocator:
 
         # All strategies failed
         elapsed = (time.monotonic() - start_time) * 1000
-        logger.error(
+        logger.debug(
             "✗ Element NOT found after %.0fms (all strategies exhausted)",
             elapsed
         )
@@ -308,7 +308,7 @@ class ElementLocator:
             time.sleep(poll_interval)
 
         elapsed = (time.monotonic() - start) * 1000
-        logger.error("wait_for(state=%s) timed out after %.0fms", state, elapsed)
+        logger.debug("wait_for(state=%s) timed out after %.0fms", state, elapsed)
         return LocatorResult(found=False, elapsed_ms=elapsed)
 
     def exists(self, name_or_criteria: Union[str, LocateCriteria], timeout: float = SHORT_TIMEOUT) -> bool:

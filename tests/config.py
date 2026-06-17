@@ -34,7 +34,7 @@ ACTIVITY_MAIN = ".MainActivity"
 DEFAULT_TIMEOUT = 15          # Default wait for element visibility
 SHORT_TIMEOUT = 5             # Quick operations (button click response)
 LONG_TIMEOUT = 30             # App startup, complex animations
-POPUP_TIMEOUT = 1             # Quick check for popup existence (fast with native selectors)
+POPUP_TIMEOUT = 0.5           # Quick check for popup existence (fast with native selectors)
 IDLE_TIMEOUT = 2              # Short pause after actions
 ANIMATION_WAIT = 1.5          # Wait for Compose animations to settle
 

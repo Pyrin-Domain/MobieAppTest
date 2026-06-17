@@ -43,10 +43,10 @@ class TestDrawingOperations(BaseTest):
     def pre_test_setup(self):
         """Ensure app is launched and ready before drawing tests."""
         self.actions.launch_app()
-        time.sleep(LONG_TIMEOUT * 0.3)
+        time.sleep(LONG_TIMEOUT * 0.1)
         self.popup_handler.handle_overlay_permission(accept=True)
         self.popup_handler.dismiss_all()
-        time.sleep(SHORT_TIMEOUT)
+        time.sleep(SHORT_TIMEOUT*0.2)
 
     def run_test(self):
         """Execute drawing operation tests."""
@@ -69,14 +69,14 @@ class TestDrawingOperations(BaseTest):
         # ── Test 4: Draw on Canvas ─────────────────────────────────────
         self._test_draw_on_canvas()
 
-        # ── Test 5: Undo / Redo ────────────────────────────────────────
+        # ── Test 5: Canvas Visibility ──────────────────────────────────
+        self._test_canvas_visibility()
+
+        # ── Test 6: Undo / Redo ────────────────────────────────────────
         self._test_undo_redo()
 
-        # ── Test 6: Clear Canvas ───────────────────────────────────────
+        # ── Test 7: Clear Canvas ───────────────────────────────────────
         self._test_clear_canvas()
-
-        # ── Test 7: Canvas Visibility ──────────────────────────────────
-        self._test_canvas_visibility()
 
         # ── Test 8: Stroke Eraser ──────────────────────────────────────
         self._test_stroke_eraser()
@@ -156,51 +156,65 @@ class TestDrawingOperations(BaseTest):
         )
 
     def _test_stroke_controls(self):
-        """Test stroke width and opacity sliders."""
+        """Test stroke width and opacity sliders.
+
+        The tool controls popup has two pages connected by a HorizontalPager:
+          Page 1: Pen / Stroke Eraser tool selection
+          Page 2: Stroke width slider + opacity slider
+
+        We must swipe from right to left WITHIN the popup area to reach page 2.
+        A full-screen swipe may miss the popup bounds entirely.
+        """
         logger.info("── Testing Stroke Controls ──")
 
-        # Open tool controls popup (swipe to second page if needed)
+        # Open tool controls popup (shows page 1: Pen/Eraser)
         self.step(
             "Open tool controls for stroke settings",
             lambda: self.actions.click("tool_controls", timeout=DEFAULT_TIMEOUT),
         )
         time.sleep(ANIMATION_WAIT)
 
-        # Check if we see width/opacity labels
+        # Verify the popup is visible by checking page-1 content
+        popup_found = (
+            self.locator.exists("pen_tab", timeout=SHORT_TIMEOUT) or
+            self.locator.exists("tools_label", timeout=SHORT_TIMEOUT)
+        )
+        if popup_found:
+            logger.info("Tool controls popup is visible (page 1)")
+        else:
+            logger.warning("Tool controls popup not detected; proceeding anyway")
+
+        # Swipe from right to left WITHIN the popup to reach page 2
+        self.step(
+            "Swipe within popup to reach page 2 (width/opacity)",
+            lambda: self._swipe_inside_tool_popup(),
+        )
+        time.sleep(ANIMATION_WAIT)
+
+        # Verify stroke controls are now visible
         controls_visible = (
             self.locator.exists("width_label", timeout=SHORT_TIMEOUT) or
             self.locator.exists("opacity_label", timeout=SHORT_TIMEOUT)
         )
 
         if controls_visible:
-            logger.info("Stroke controls (width/opacity) are visible")
+            logger.info("Stroke controls (width/opacity) found on page 2")
 
-            # Try to interact with the width slider
-            # Sliders in Compose are hard to locate precisely, so we use coordinate-based interaction
+            # Adjust stroke width
             self.step(
                 "Adjust stroke width via swipe",
                 lambda: self._interact_with_slider("width"),
                 critical=False,
             )
-        else:
-            # Need to swipe to the second page of the popup
-            logger.info("Swiping to second page of tool controls popup...")
-            self.actions.swipe("left")
-            time.sleep(ANIMATION_WAIT)
 
-            controls_now = (
-                self.locator.exists("width_label", timeout=SHORT_TIMEOUT) or
-                self.locator.exists("opacity_label", timeout=SHORT_TIMEOUT)
+            # Adjust stroke opacity
+            self.step(
+                "Adjust stroke opacity via swipe",
+                lambda: self._interact_with_slider("opacity"),
+                critical=False,
             )
-            if controls_now:
-                logger.info("Stroke controls found after swiping")
-                self.step(
-                    "Adjust stroke opacity via swipe",
-                    lambda: self._interact_with_slider("opacity"),
-                    critical=False,
-                )
-            else:
-                logger.warning("Stroke controls not found; skipping slider test")
+        else:
+            logger.warning("Stroke controls not found after swiping; skipping slider test")
 
         # Close popup
         self.step(
@@ -263,6 +277,10 @@ class TestDrawingOperations(BaseTest):
         visible). Redo is in the second drawer, which is collapsed by default
         and must be expanded first via the expand_toolbar button.
 
+        After expanding, the redo button is on the right side of the toolbar
+        and may be off-screen — we need to swipe from right to left within
+        the toolbar area to scroll and reveal it.
+
         CRITICAL: Compose IconButton accessibility nodes sometimes expose the
         inner Icon's contentDescription without making the node itself clickable.
         We use coordinate-based clicking (bounds center) to ensure the parent
@@ -283,7 +301,6 @@ class TestDrawingOperations(BaseTest):
         )
 
         # Expand the second drawer to reveal redo button
-        # Use coordinate click because the Icon node (not IconButton) is found
         self.step(
             "Expand second drawer for redo",
             lambda: self.click_element_by_coords("expand_toolbar", DEFAULT_TIMEOUT),
@@ -292,13 +309,20 @@ class TestDrawingOperations(BaseTest):
         # Wait for second drawer animation to complete
         time.sleep(ANIMATION_WAIT)
 
-        # Redo (now visible in second drawer)
+        # Swipe right-to-left within the toolbar to scroll and reveal redo
+        self.step(
+            "Swipe within toolbar to reveal redo button",
+            lambda: self._swipe_inside_toolbar(),
+        )
+        time.sleep(ANIMATION_WAIT)
+
+        # Redo (now visible after scrolling)
         self.step(
             "Redo one stroke",
-            lambda: self.click_element_by_coords("redo", DEFAULT_TIMEOUT),
+            lambda: self.click_element_by_coords("redo", 1.0),
         )
 
-        # Collapse the second drawer to restore clean state
+        # Collapse the second drawer — this restores the default state
         self.step(
             "Collapse second drawer",
             lambda: self.click_element_by_coords("collapse_toolbar", DEFAULT_TIMEOUT),
@@ -505,6 +529,190 @@ class TestDrawingOperations(BaseTest):
         except Exception as e:
             logger.warning("Slider interaction failed: %s", e)
 
+        return False
+
+    def _swipe_inside_tool_popup(self):
+        """
+        Swipe from right to left within the tool controls popup bounds.
+
+        The popup uses a HorizontalPager to switch between:
+          Page 1: Pen / Stroke Eraser
+          Page 2: Stroke width + opacity
+
+        We locate the popup by finding page-1 elements (pen_tab, tools_label,
+        eraser_tab) and then swipe horizontally within that region.
+        """
+        import re
+        import xml.etree.ElementTree as ET
+
+        try:
+            xml = self.device.dump_hierarchy()
+            root = ET.fromstring(xml)
+
+            # Find page-1 elements to determine popup bounds
+            page1_patterns = [
+                re.compile(r"(Pen|笔)", re.IGNORECASE),
+                re.compile(r"(Stroke Eraser|笔画橡皮)", re.IGNORECASE),
+                re.compile(r"(Tools|工具)", re.IGNORECASE),
+            ]
+
+            popup_bounds = None
+            for node in root.iter("node"):
+                text = node.get("text", "")
+                desc = node.get("content-desc", "")
+                combined = f"{text} {desc}"
+
+                if any(p.search(combined) for p in page1_patterns):
+                    bounds_str = node.get("bounds", "")
+                    if bounds_str:
+                        m = re.match(r"\[(\d+),(\d+)\]\[(\d+),(\d+)\]", bounds_str)
+                        if m:
+                            x1, y1, x2, y2 = map(int, m.groups())
+                            if popup_bounds is None:
+                                popup_bounds = [x1, y1, x2, y2]
+                            else:
+                                # Expand bounds to encompass all page-1 widgets
+                                popup_bounds[0] = min(popup_bounds[0], x1)
+                                popup_bounds[1] = min(popup_bounds[1], y1)
+                                popup_bounds[2] = max(popup_bounds[2], x2)
+                                popup_bounds[3] = max(popup_bounds[3], y2)
+
+            if popup_bounds:
+                px1, py1, px2, py2 = popup_bounds
+                popup_width = px2 - px1
+                # Expand vertically to cover the full Pager area
+                py1 -= 40
+                py2 += 120
+                mid_y = (py1 + py2) // 2
+
+                # Swipe from near-right (95%) to near-left (5%) — need most of
+                # the pager width to trigger a HorizontalPager page switch
+                start_x = px1 + int(popup_width * 0.95)
+                end_x = px1 + int(popup_width * 0.05)
+
+                logger.info(
+                    "Swiping within popup bounds [%d,%d,%d,%d] width=%d: (%d,%d)→(%d,%d)",
+                    px1, py1, px2, py2, popup_width, start_x, mid_y, end_x, mid_y
+                )
+                # Fast swipe (0.15s) for quick pager scroll
+                self.device.swipe(start_x, mid_y, end_x, mid_y, duration=0.15)
+                time.sleep(ANIMATION_WAIT)
+                return True
+
+        except Exception as e:
+            logger.warning("Failed to detect popup bounds for swipe: %s", e)
+
+        # Fallback: swipe in the center region (typical popup position)
+        logger.warning("Using fallback center-screen swipe for popup pager")
+        w, h = self.actions.screen_width, self.actions.screen_height
+        # Swipe most of the screen width in the upper-center area
+        self.device.swipe(
+            int(w * 0.85), int(h * 0.45),
+            int(w * 0.15), int(h * 0.45),
+            duration=0.15
+        )
+        time.sleep(ANIMATION_WAIT)
+        return False
+
+    def _swipe_inside_toolbar(self, direction: str = "left"):
+        """
+        Swipe horizontally within the toolbar bounds.
+
+        Args:
+            direction: "left" (right→left, to scroll leftward and reveal right side)
+                       "right" (left→right, to scroll back)
+
+        The toolbar has two drawers:
+          Drawer 1 (always visible): undo, clear, tool_controls, color_picker, visibility
+          Drawer 2 (expandable):   redo, passthrough, settings, etc.
+
+        After clicking expand_toolbar, drawer 2 opens to the right.
+        The redo button may be off-screen — we scroll the toolbar
+        horizontally to reveal it.
+
+        CRITICAL: We only use drawer-1 elements to compute bounds, because
+        drawer-2 elements (Collapse, Redo) may be off-screen and distort
+        the swipe range. Starting a swipe outside the interactive toolbar
+        area won't trigger horizontal scroll.
+        """
+        import re
+        import xml.etree.ElementTree as ET
+
+        try:
+            xml = self.device.dump_hierarchy()
+            root = ET.fromstring(xml)
+
+            # Only drawer-1 elements — drawer-2 elements may be off-screen
+            drawer1_patterns = [
+                re.compile(r"(Expand toolbar|展开工具栏)", re.IGNORECASE),
+                re.compile(r"(Undo|撤销)", re.IGNORECASE),
+                re.compile(r"(Clear canvas|清空画布)", re.IGNORECASE),
+                re.compile(r"(Tool controls|工具选项)", re.IGNORECASE),
+                re.compile(r"(Color picker|取色器)", re.IGNORECASE),
+                re.compile(r"(Show canvas|Hide canvas|显示画布|隐藏画布)", re.IGNORECASE),
+            ]
+
+            toolbar_bounds = None
+            for node in root.iter("node"):
+                desc = node.get("content-desc", "")
+
+                if any(p.search(desc) for p in drawer1_patterns):
+                    bounds_str = node.get("bounds", "")
+                    if bounds_str:
+                        m = re.match(r"\[(\d+),(\d+)\]\[(\d+),(\d+)\]", bounds_str)
+                        if m:
+                            x1, y1, x2, y2 = map(int, m.groups())
+                            if toolbar_bounds is None:
+                                toolbar_bounds = [x1, y1, x2, y2]
+                            else:
+                                toolbar_bounds[0] = min(toolbar_bounds[0], x1)
+                                toolbar_bounds[1] = min(toolbar_bounds[1], y1)
+                                toolbar_bounds[2] = max(toolbar_bounds[2], x2)
+                                toolbar_bounds[3] = max(toolbar_bounds[3], y2)
+
+            if toolbar_bounds:
+                tx1, ty1, tx2, ty2 = toolbar_bounds
+                w, h = self.actions.screen_width, self.actions.screen_height
+                mid_y = (ty1 + ty2) // 2
+
+                if direction == "left":
+                    # Start from the right edge of drawer-1 bounds —
+                    # this ensures the initial touch is ON the interactive
+                    # toolbar area, so horizontal scroll can capture it.
+                    # Swipe across the full drawer-1 width to pull drawer-2 in.
+                    start_x = tx2 - 10
+                    end_x = tx1 + 10
+                else:
+                    start_x = tx1 + 10
+                    end_x = tx2 - 10
+
+                logger.info(
+                    "Swiping %s at toolbar Y=%d, bounds [%d,%d,%d,%d]: (%d,%d)→(%d,%d)",
+                    direction, mid_y, tx1, ty1, tx2, ty2, start_x, mid_y, end_x, mid_y
+                )
+                self.device.swipe(start_x, mid_y, end_x, mid_y, duration=0.2)
+                time.sleep(ANIMATION_WAIT)
+                return True
+
+        except Exception as e:
+            logger.warning("Failed to detect toolbar bounds for swipe: %s", e)
+
+        # Fallback: swipe horizontally in the upper-left toolbar area
+        logger.warning("Using fallback toolbar-area swipe")
+        w, h = self.actions.screen_width, self.actions.screen_height
+        if direction == "left":
+            self.device.swipe(
+                int(w * 0.95), int(h * 0.08),
+                int(w * 0.05), int(h * 0.08),
+                duration=0.15
+            )
+        else:
+            self.device.swipe(
+                int(w * 0.05), int(h * 0.08),
+                int(w * 0.95), int(h * 0.08),
+                duration=0.15
+            )
+        time.sleep(ANIMATION_WAIT)
         return False
 
     def _close_current_popup(self):

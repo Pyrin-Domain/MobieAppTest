@@ -693,7 +693,7 @@ class UIActions:
         """
         try:
             self.device.app_start(PACKAGE_NAME, wait=wait)
-            time.sleep(LONG_TIMEOUT * 0.5)  # Wait for app to initialize
+            time.sleep(IDLE_TIMEOUT + ANIMATION_WAIT)  # Brief pause for UI to settle
             logger.info("✓ App launched: %s", PACKAGE_NAME)
             return True
         except Exception as e:
